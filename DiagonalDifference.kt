@@ -30,7 +30,7 @@ fun diagonalDifference(arr: Array<Array<Int>>): Int {
     for(line in 1..arr.size){
         primaryDiagonal += arr[counter][counter]
         secondaryDiagonal += arr[counter][(arr.size - 1) - counter]
-        counter++
+        counter++2
     }
     return Math.abs(primaryDiagonal - secondaryDiagonal)
 }
