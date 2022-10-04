@@ -5,16 +5,16 @@
 
 fun main(){
     try{
-        print("A?")
+        print("A? ")
         val A = readln().toInt()
-        print("B?")
+        print("B? ")
         val B = readln().toInt()
         println("A < B == ${A < B}")
         println("A + B == ${A + B}")
         println("A - B == ${A - B}")
         println("A x B == ${A * B}")
         println("A / B == ${A.toDouble() / B.toDouble()}")   
-    }   catch (e: NumberFormatException) {
+    } catch (e: NumberFormatException) {
             println("Only Integers are accepted!")
         main()
     }

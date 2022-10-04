@@ -7,5 +7,5 @@ fun main(){
     println("A + B == ${A + B}")
     println("A - B == ${A - B}")
     println("A x B == ${A * B}")
-    println("A / B == $A/$B")
+    println("A / B == ${A / B}")
 }
