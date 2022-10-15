@@ -6,39 +6,23 @@ fun main(){
   print("Ano? ")
   val year = readln().toInt()
 
-  val dateObj = Date(day, month, year)
-  println(dateObj.validateDate())
-
+  when{
+    year !in 1900..2050 -> "Ano $year fora do intervalo 1900..2050"
+    month !in 1..12 -> "Mês $month fora do intervalo 1..12"
+    else -> validateDate(day, month, year)
+  }.also(::println)
 }  
 
-class Date(val day: Int, val month: Int, val year: Int){
-  init{
-    require(year in 1900..2050){ "Ano $year fora do intervalo 1900..2050" }
-    require(month in 1..12){ "Mês $month fora do intervalo 1..12" }
-    require(day in 1..31){ "Dia $day fora do intervalo 1..31" }
+fun validateDate(day: Int, month: Int, year: Int): String{
+  var daysInMonth: Int
+  when(month){
+    1, 3, 5, 7, 8, 10, 12 -> daysInMonth = 31
+    2 -> daysInMonth = if((year % 400 == 0) || ((year % 4 == 0) && (year % 100 != 0))) 29 else 28
+    else -> daysInMonth = 30
   }
 
-  val maxDay = maxDays()
-
-  fun isLeapYear(): Boolean{
-    return if((year % 400 == 0) || ((year % 4 == 0) && (year % 100 != 0))) true else false
+  return when{
+    day !in 1..daysInMonth -> "Dia $day fora do intervalo 1..$daysInMonth"
+    else -> "Data $day/$month/$year é valida"
   }
-
-  fun maxDays(): Int{
-    var daysInMonth: Int
-  
-    when(month){
-      1, 3, 5, 7, 8, 10, 12 -> daysInMonth = 31
-      2 -> daysInMonth = 28
-      else -> daysInMonth = 30
-    }
-
-    if(month == 2 && isLeapYear()) daysInMonth++ else
-
-    require(day <= daysInMonth){"Dia $day fora do intervalo 1..$daysInMonth"}
-
-    return daysInMonth
-  }
-
-  fun validateDate() = "Data $day/$month/$year é valida"
 }
